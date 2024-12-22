@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scaletestapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scaletestapp
+  template:
+    metadata:
+      labels:
+        app: scaletestapp
+    spec:
+      containers:
+        - name: scaletestapp
+          image: shestera/scaletestapp
+          resources:
+# чутка поменял дефолтные 30Mi
+            requests:
+              cpu: "10m"
+              memory: "12Mi"
+            limits:
+              cpu: "20m"
+              memory: "25Mi"
+          ports:
+            - containerPort: 8080
